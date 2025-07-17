@@ -1,0 +1,44 @@
+class RoutesName {
+  static String INITIAL = "/";
+  static String onbordingScreen = "/onbordingScreen";
+  static String mainDrawerScreen = "/mainDrawerScreen";
+  static String bottomNavBar = "/bottomNavBar";
+  static String homeScreen = "/homeScreen";
+  static String loginScreen = "/loginScreen";
+  static String signUpScreen = "/signUpScreen";
+  static String frontendListingDemoScreen = "/frontendListingDemoScreen";
+  static String allListingScreen = "/allListingScreen";
+  static String authorProfileScreen = "/authorProfileScreen";
+  static String myListingScreen = "/myListingScreen";
+  static String reviewListScreen = "/reviewListScreen";
+  static String dynamicFormScreen = "/dynamicFormScreen";
+  static String listingDetailsScreen = "/listingDetailsScreen";
+  static String productDetailsScreen = "/productDetailsScreen";
+  static String profileSettingScreen = "/profileSettingScreen";
+  static String editProfileScreen = "/editProfileScreen";
+  static String changePasswordScreen = "/changePasswordScreen";
+  static String addListingScreen = "/addListingScreen";
+  static String wishListScreen = "/wishListScreen";
+  static String transactionScreen = "/transactionScreen";
+  static String paymentHistoryScreen = "/paymentHistoryScreen";
+  static String myAnalyticsScreen = "/myAnalyticsScreen";
+  static String myAnalyticsDetailsScreen = "/myAnalyticsDetailsScreen";
+  static String myPackageScreen = "/myPackageScreen";
+  static String productEnquiryScreen = "/productEnquiryScreen";
+  static String productEnquiryInboxScreen = "/productEnquiryInboxScreen";
+  static String supportTicketListScreen = "/supportTicketListScreen";
+  static String supportTicketViewScreen = "/supportTicketViewScreen";
+  static String twoFaVerificationScreen = "/twoFaVerificationScreen";
+  static String verificationListScreen = "/verificationListScreen";
+  static String createSupportTicketScreen = "/createSupportTicketScreen";
+  static String notificationPermissionScreen = "/notificationPermissionScreen";
+  static String claimBusinessScreen = "/claimBusinessScreen";
+  static String claimBusinessInboxScreen = "/claimBusinessInboxScreen";
+  static String pricingScreen = "/pricingScreen";
+  static String paymentScreen = "/paymentScreen";
+  static String dashboardScreen = "/dashboardScreen";
+  static String listingCategoryScreen = "/listingCategoryScreen";
+
+  static String deleteAccountScreen = "/deleteAccountScreen";
+  static String notificationScreen = "/notificationScreen";
+}

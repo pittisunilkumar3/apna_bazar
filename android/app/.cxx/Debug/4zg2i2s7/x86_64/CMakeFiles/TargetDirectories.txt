@@ -1,0 +1,2 @@
+C:/Users/pitti/Downloads/codecanyon-57380835-listplace-business-directory-listing-flutter-app-android-ios/Flutter Source Code/project/listplace/android/app/.cxx/Debug/4zg2i2s7/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/pitti/Downloads/codecanyon-57380835-listplace-business-directory-listing-flutter-app-android-ios/Flutter Source Code/project/listplace/android/app/.cxx/Debug/4zg2i2s7/x86_64/CMakeFiles/rebuild_cache.dir
