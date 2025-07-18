@@ -23,6 +23,8 @@ import 'package:listplace/views/widgets/text_theme_extension.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:readmore/readmore.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../../../../config/app_colors.dart';
 import '../../../../config/styles.dart';
@@ -568,6 +570,8 @@ class ListingDetailsScreen extends StatelessWidget {
                                       if (frontendListingCtrl.selectedIndex == 3)
                                         productsWidget(frontendListingCtrl, t, storedLanguage),
                                       if (frontendListingCtrl.selectedIndex == 4)
+                                        socialWidget(frontendListingCtrl, t, context, storedLanguage),
+                                      if (frontendListingCtrl.selectedIndex == 5)
                                         reviewWidget(frontendListingCtrl, t, context),
                                     ]),
                                   ],
@@ -2158,6 +2162,128 @@ class ListingDetailsScreen extends StatelessWidget {
     );
   }
 
+  Column socialWidget(FrontendListingController frontendCtrl, TextTheme t,
+      BuildContext context, storedLanguage) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (frontendCtrl.listingDetailsList[0].getSocialInfo == null ||
+            frontendCtrl.listingDetailsList[0].getSocialInfo!.isEmpty)
+          Align(
+            alignment: Alignment.center,
+            child: Column(
+              children: [
+                Helpers.notFound(top: 0, text: storedLanguage['No social media links found'] ?? "No social media links found"),
+                VSpace(20.h),
+              ],
+            ),
+          ),
+        if (frontendCtrl.listingDetailsList[0].getSocialInfo != null &&
+            frontendCtrl.listingDetailsList[0].getSocialInfo!.isNotEmpty)
+          Container(
+            padding: EdgeInsets.all(20.w),
+            width: double.maxFinite,
+            decoration: BoxDecoration(
+              color: AppThemes.getFillColor(),
+              borderRadius: Dimensions.kBorderRadius,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  storedLanguage['Social Media Links'] ?? "Social Media Links",
+                  style: t.bodyLarge?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: Get.isDarkMode ? AppColors.whiteColor : AppColors.blackColor,
+                  ),
+                ),
+                VSpace(16.h),
+                ...frontendCtrl.listingDetailsList[0].getSocialInfo!.map((socialInfo) {
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: 12.h),
+                    child: InkWell(
+                      onTap: () async {
+                        if (socialInfo.socialUrl != null &&
+                            socialInfo.socialUrl.toString().isNotEmpty) {
+                          final Uri url = Uri.parse(socialInfo.socialUrl.toString());
+                          if (await canLaunchUrl(url)) {
+                            await launchUrl(url, mode: LaunchMode.externalApplication);
+                          } else {
+                            Helpers.showSnackBar(
+                              title: 'Error',
+                              msg: 'Could not launch ${socialInfo.socialUrl}',
+                            );
+                          }
+                        }
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+                        decoration: BoxDecoration(
+                          color: Get.isDarkMode ? AppColors.darkCardColor : AppColors.whiteColor,
+                          borderRadius: BorderRadius.circular(8.r),
+                          border: Border.all(
+                            color: Get.isDarkMode ? AppColors.black30 : AppColors.black10,
+                            width: 1,
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 40.w,
+                              height: 40.h,
+                              decoration: BoxDecoration(
+                                color: AppColors.mainColor.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(8.r),
+                              ),
+                              child: Icon(
+                                _getSocialIcon(socialInfo.socialIcon.toString()),
+                                size: 20.h,
+                                color: AppColors.mainColor,
+                              ),
+                            ),
+                            HSpace(12.w),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    _getSocialPlatformName(socialInfo.socialIcon.toString()),
+                                    style: t.bodyMedium?.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      color: Get.isDarkMode ? AppColors.whiteColor : AppColors.blackColor,
+                                    ),
+                                  ),
+                                  VSpace(2.h),
+                                  Text(
+                                    socialInfo.socialUrl.toString(),
+                                    style: t.bodySmall?.copyWith(
+                                      color: Get.isDarkMode ? AppColors.black30 : AppColors.black50,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Icon(
+                              Icons.open_in_new,
+                              size: 16.h,
+                              color: Get.isDarkMode ? AppColors.black30 : AppColors.black50,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ],
+            ),
+          ),
+        VSpace(50.h),
+      ],
+    );
+  }
+
   c.CarouselSlider caroselSection(c.CarouselSliderController controller,
       TextTheme t, FrontendListingController frontendCtrl) {
     return c.CarouselSlider(
@@ -2254,5 +2380,63 @@ class ListingDetailsScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  // Helper function to get social media icon based on icon name
+  IconData _getSocialIcon(String iconName) {
+    final iconNameLower = iconName.toLowerCase();
+
+    if (iconNameLower.contains('facebook')) {
+      return FontAwesomeIcons.facebook;
+    } else if (iconNameLower.contains('twitter') || iconNameLower.contains('x')) {
+      return FontAwesomeIcons.twitter;
+    } else if (iconNameLower.contains('instagram')) {
+      return FontAwesomeIcons.instagram;
+    } else if (iconNameLower.contains('linkedin')) {
+      return FontAwesomeIcons.linkedin;
+    } else if (iconNameLower.contains('youtube')) {
+      return FontAwesomeIcons.youtube;
+    } else if (iconNameLower.contains('whatsapp')) {
+      return FontAwesomeIcons.whatsapp;
+    } else if (iconNameLower.contains('telegram')) {
+      return FontAwesomeIcons.telegram;
+    } else if (iconNameLower.contains('google')) {
+      return FontAwesomeIcons.google;
+    } else if (iconNameLower.contains('discord')) {
+      return FontAwesomeIcons.discord;
+    } else if (iconNameLower.contains('globe') || iconNameLower.contains('website')) {
+      return FontAwesomeIcons.globe;
+    } else {
+      return FontAwesomeIcons.link; // Default icon for unknown platforms
+    }
+  }
+
+  // Helper function to get social media platform name
+  String _getSocialPlatformName(String iconName) {
+    final iconNameLower = iconName.toLowerCase();
+
+    if (iconNameLower.contains('facebook')) {
+      return 'Facebook';
+    } else if (iconNameLower.contains('twitter') || iconNameLower.contains('x')) {
+      return 'Twitter/X';
+    } else if (iconNameLower.contains('instagram')) {
+      return 'Instagram';
+    } else if (iconNameLower.contains('linkedin')) {
+      return 'LinkedIn';
+    } else if (iconNameLower.contains('youtube')) {
+      return 'YouTube';
+    } else if (iconNameLower.contains('whatsapp')) {
+      return 'WhatsApp';
+    } else if (iconNameLower.contains('telegram')) {
+      return 'Telegram';
+    } else if (iconNameLower.contains('google')) {
+      return 'Google';
+    } else if (iconNameLower.contains('discord')) {
+      return 'Discord';
+    } else if (iconNameLower.contains('globe') || iconNameLower.contains('website')) {
+      return 'Website';
+    } else {
+      return 'Social Link'; // Default name for unknown platforms
+    }
   }
 }

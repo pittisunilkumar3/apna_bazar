@@ -30,10 +30,11 @@ class FrontendListingController extends GetxController {
   int selectedIndex = 0;
   int carouselIndex = 0;
   List<String> categoryList = [
-    "Description",
+    "About",
     "Video",
     "Amenities",
     "Products",
+    "Social",
     "Reviews",
   ];
 
