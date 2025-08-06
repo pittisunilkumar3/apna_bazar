@@ -6,7 +6,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_maps_place_picker_mb/google_maps_place_picker.dart';
+import 'package:place_picker_google/place_picker_google.dart';
 import 'package:listplace/controllers/profile_controller.dart';
 import 'package:listplace/views/widgets/app_button.dart';
 import 'package:listplace/views/widgets/text_theme_extension.dart';
@@ -356,34 +356,30 @@ class BasicInfoTab extends StatelessWidget {
                                           apiKey:
                                               dotenv.env['GOOGLE_API_KEY'] ??
                                                   'DEFAULT_KEY',
-                                          useCurrentLocation: true,
-                                          hintText: "Find a place ...",
-                                          searchingText: "Please wait ...",
-                                          selectText: "Select place",
-                                          outsideOfPickAreaText:
-                                              "Place not in area",
-                                          onPlacePicked: (PickResult result) {
+                                          onPlacePicked: (LocationResult result) {
                                             if (result.formattedAddress != null)
                                               manageListingCtrl.searchedPlaceEditingCtrlr.text =
                                                   result.formattedAddress!;
                                             manageListingCtrl.latEditingCtrlr.text = result
-                                                .geometry!.location.lat
+                                                .latLng!.latitude
                                                 .toString();
                                             manageListingCtrl.lngEditingCtrlr.text = result
-                                                .geometry!.location.lng
+                                                .latLng!.longitude
                                                 .toString();
                                             Navigator.of(context).pop();
                                           },
-                                          initialPosition: LatLng(
+                                          initialLocation: LatLng(
                                               manageListingCtrl.latEditingCtrlr.text.isEmpty
                                                   ? 25.629454793647078
                                                   : double.parse(
                                                       manageListingCtrl.latEditingCtrlr.text),
-                                              manageListingCtrl.latEditingCtrlr.text.isEmpty
+                                              manageListingCtrl.lngEditingCtrlr.text.isEmpty
                                                   ? 92.24121093750001
                                                   : double.parse(
-                                                      manageListingCtrl.latEditingCtrlr.text)),
-                                          resizeToAvoidBottomInset: false,
+                                                      manageListingCtrl.lngEditingCtrlr.text)),
+                                          searchInputDecorationConfig: const SearchInputDecorationConfig(
+                                            hintText: "Find a place ...",
+                                          ),
                                         ),
                                       ),
                                     );
@@ -587,15 +583,8 @@ class BasicInfoTab extends StatelessWidget {
                                                   apiKey: dotenv.env[
                                                           'GOOGLE_API_KEY'] ??
                                                       'DEFAULT_KEY',
-                                                  useCurrentLocation: true,
-                                                  hintText: "Find a place ...",
-                                                  searchingText:
-                                                      "Please wait ...",
-                                                  selectText: "Select place",
-                                                  outsideOfPickAreaText:
-                                                      "Place not in area",
                                                   onPlacePicked:
-                                                      (PickResult result) {
+                                                      (LocationResult result) {
                                                     if (result
                                                             .formattedAddress !=
                                                         null)
@@ -604,16 +593,16 @@ class BasicInfoTab extends StatelessWidget {
                                                           result
                                                               .formattedAddress!;
                                                     manageListingCtrl.latEditingCtrlr.text =
-                                                        result.geometry!
-                                                            .location.lat
+                                                        result.latLng!
+                                                            .latitude
                                                             .toString();
                                                     manageListingCtrl.lngEditingCtrlr.text =
-                                                        result.geometry!
-                                                            .location.lng
+                                                        result.latLng!
+                                                            .longitude
                                                             .toString();
                                                     Navigator.of(context).pop();
                                                   },
-                                                  initialPosition: LatLng(
+                                                  initialLocation: LatLng(
                                                     manageListingCtrl.latEditingCtrlr.text
                                                             .isEmpty
                                                         ? 25.629454793647078
@@ -627,8 +616,9 @@ class BasicInfoTab extends StatelessWidget {
                                                             .lngEditingCtrlr
                                                             .text),
                                                   ),
-                                                  resizeToAvoidBottomInset:
-                                                      false,
+                                                  searchInputDecorationConfig: const SearchInputDecorationConfig(
+                                                    hintText: "Find a place ...",
+                                                  ),
                                                 ),
                                               );
                                             },

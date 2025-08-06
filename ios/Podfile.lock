@@ -259,7 +259,7 @@ SPEC CHECKSUMS:
   NWWebSocket: 040d22f23438cc09aaeabf537beff67699c3c76d
   open_file_ios: 461db5853723763573e140de3193656f91990d9e
   OrderedSet: e539b66b644ff081c73a262d24ad552a69be3a94
-  package_info_plus: 115f4ad11e0698c8c1c5d8a689390df880f47e85
+  package_info_plus: c0502532a26c7662a62a356cebe2692ec5fe4ec4
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
   pusher_channels_flutter: 01297e6e420e0ad61a6e5901e27bb272a6f58ec2
