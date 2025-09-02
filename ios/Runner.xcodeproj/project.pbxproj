@@ -498,7 +498,7 @@
 				DEVELOPMENT_TEAM = 852S8SPG8J;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Apna Bazar";
+				INFOPLIST_KEY_CFBundleDisplayName = "Apna World Market";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -680,7 +680,7 @@
 				DEVELOPMENT_TEAM = 852S8SPG8J;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Apna Bazar";
+				INFOPLIST_KEY_CFBundleDisplayName = "Apna World Market";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -706,7 +706,7 @@
 				DEVELOPMENT_TEAM = 852S8SPG8J;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Apna Bazar";
+				INFOPLIST_KEY_CFBundleDisplayName = "Apna World Market";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
